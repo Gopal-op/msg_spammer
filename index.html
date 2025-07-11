@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Message Spammer For Prank</title>
+  <style>
+    body {
+      background-color: #121212;
+      color: #fff;
+      font-family: 'Segoe UI', sans-serif;
+      text-align: center;
+      padding: 30px;
+    }
+    input, button {
+      padding: 10px;
+      font-size: 16px;
+      margin: 10px;
+      border-radius: 6px;
+      border: none;
+    }
+    input {
+      width: 300px;
+    }
+    button {
+      background-color: #ff4757;
+      color: white;
+      cursor: pointer;
+    }
+    #output {
+      margin-top: 30px;
+      padding: 20px;
+      background: #1e1e1e;
+      border-radius: 10px;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+      text-align: left;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      max-height: 400px;
+      overflow-y: auto;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>💣 Message Spammer For Prank</h1>
+
+  <input type="text" id="message" placeholder="Enter your message"><br>
+  <input type="number" id="count" placeholder="How many times?" min="1" max="1000"><br>
+  <button onclick="startSpamming()">Start Spam</button>
+  <button onclick="stopSpamming()">Stop</button>
+
+  <div id="output" contenteditable="true"></div>
+
+  <script>
+    let spamInterval;
+
+    function startSpamming() {
+      const msg = document.getElementById("message").value;
+      const count = parseInt(document.getElementById("count").value);
+      const output = document.getElementById("output");
+
+      if (!msg || isNaN(count) || count <= 0) {
+        alert("Enter a valid message and count!");
+        return;
+      }
+
+      output.innerHTML = ''; // clear previous
+
+      let sent = 0;
+      spamInterval = setInterval(() => {
+        if (sent >= count) {
+          clearInterval(spamInterval);
+          alert("Spamming done! You can copy messages below.");
+          return;
+        }
+        const span = document.createElement("div");
+        span.textContent = msg;
+        output.appendChild(span);
+        sent++;
+      }, 50); // adjust delay as needed
+    }
+
+    function stopSpamming() {
+      clearInterval(spamInterval);
+      alert("Stopped!");
+    }
+  </script>
+
+</body>
+    </html>
